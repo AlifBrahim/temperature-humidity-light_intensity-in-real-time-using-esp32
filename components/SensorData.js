@@ -22,7 +22,7 @@ const SensorData = () => {
         const eventSource = new EventSource('/api/realtime');
         eventSource.onmessage = event => {
             const newData = JSON.parse(event.data);
-            setData(prevData => [newData, ...prevData.slice(0, 99)]);
+            setData(prevData => [newData, ...prevData]);
             setLightIntensity(newData.light_intensity / 4095);
         };
 
@@ -59,6 +59,9 @@ const SensorData = () => {
     useEffect(() => {
         if (!data.length) return;
 
+        // Filter data for today
+        const todayData = data.filter(entry => new Date(entry.timestamp).toDateString() === new Date().toDateString());
+
         const svg = d3.select(svgRef.current);
         svg.selectAll('*').remove();
 
@@ -67,11 +70,11 @@ const SensorData = () => {
         const margin = { top: 20, right: 50, bottom: 70, left: 60 };
 
         const x = d3.scaleTime()
-            .domain(d3.extent(data, d => new Date(d.timestamp)))
+            .domain(d3.extent(todayData, d => new Date(d.timestamp)))
             .range([margin.left, width - margin.right]);
 
         const y = d3.scaleLinear()
-            .domain([0, d3.max(data, d => Math.max(d.temperature, d.humidity))])
+            .domain([0, d3.max(todayData, d => Math.max(d.temperature, d.humidity))])
             .nice()
             .range([height - margin.bottom, margin.top]);
 
@@ -85,7 +88,7 @@ const SensorData = () => {
 
         lines.forEach(lineData => {
             svg.append('path')
-                .datum(data)
+                .datum(todayData)
                 .attr('fill', 'none')
                 .attr('stroke', lineData.color)
                 .attr('stroke-width', 2)
@@ -93,7 +96,7 @@ const SensorData = () => {
 
             svg.append('text')
                 .attr('x', width - margin.right)
-                .attr('y', y(d3.max(data, d => d[lineData.value])))
+                .attr('y', y(d3.max(todayData, d => d[lineData.value])))
                 .attr('text-anchor', 'end')
                 .attr('font-size', '12px')
                 .attr('fill', lineData.color)
@@ -112,7 +115,7 @@ const SensorData = () => {
             .attr('transform', `translate(${margin.left}, 0)`);
 
         svg.append('path')
-            .datum(data)
+            .datum(todayData)
             .attr('fill', 'none')
             .attr('stroke', 'steelblue')
             .attr('stroke-width', 2)
@@ -120,7 +123,7 @@ const SensorData = () => {
 
         svg.append('text')
             .attr('x', width / 2)
-            .attr('y', height )
+            .attr('y', height)
             .attr('text-anchor', 'middle')
             .attr('font-size', '16px')
             .attr('fill', 'black')
@@ -136,10 +139,6 @@ const SensorData = () => {
             .text('Temperature (°C) + Humidity');
 
     }, [data, currentTime]);
-
-    useEffect(() => {
-        console.log('Light Intensity:', lightIntensity); // Log to check updates
-    }, [lightIntensity]);
 
     return (
         <div className="p-5">

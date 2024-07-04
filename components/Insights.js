@@ -106,41 +106,44 @@ const Insights = ({ data }) => {
             </div>
             {insights.avgTemp && (
                 <div className="grid grid-cols-2 gap-4">
-                    <div className="p-3 border rounded bg-gray-100">
+                    <div className="p-3 border rounded bg-gray-100 relative">
                         <p className="text-lg"><strong>Average Temperature:</strong> {insights.avgTemp} °C</p>
                     </div>
-                    <div className="p-3 border rounded bg-gray-100">
+                    <div className="p-3 border rounded bg-gray-100 relative">
                         <p className="text-lg"><strong>Minimum Temperature:</strong> {insights.minTemp} °C (at {new Date(insights.minTempTime).toLocaleString()})</p>
                     </div>
-                    <div className="p-3 border rounded bg-gray-100">
+                    <div className="p-3 border rounded bg-gray-100 relative">
                         <p className="text-lg"><strong>Maximum Temperature:</strong> {insights.maxTemp} °C (at {new Date(insights.maxTempTime).toLocaleString()})</p>
                     </div>
-                    <div className="p-3 border rounded bg-gray-100">
+                    <div className="p-3 border rounded bg-gray-100 relative">
                         <p className="text-lg"><strong>Average Humidity:</strong> {insights.avgHumidity} %</p>
                     </div>
-                    <div className="p-3 border rounded bg-gray-100">
+                    <div className="p-3 border rounded bg-gray-100 relative">
                         <p className="text-lg"><strong>Minimum Humidity:</strong> {insights.minHumidity} % (at {new Date(insights.minHumidityTime).toLocaleString()})</p>
                     </div>
-                    <div className="p-3 border rounded bg-gray-100">
+                    <div className="p-3 border rounded bg-gray-100 relative">
                         <p className="text-lg"><strong>Maximum Humidity:</strong> {insights.maxHumidity} % (at {new Date(insights.maxHumidityTime).toLocaleString()})</p>
                     </div>
-                    <div className="p-3 border rounded bg-gray-100">
+                    <div className="p-3 border rounded bg-gray-100 relative">
                         <p className="text-lg"><strong>Average Light Intensity:</strong> {insights.avgLightIntensity}</p>
                     </div>
-                    <div className="p-3 border rounded bg-gray-100">
+                    <div className="p-3 border rounded bg-gray-100 relative">
                         <p className="text-lg"><strong>Minimum Light Intensity:</strong> {insights.minLightIntensity} (at {new Date(insights.minLightIntensityTime).toLocaleString()})</p>
                     </div>
-                    <div className="p-3 border rounded bg-gray-100">
+                    <div className="p-3 border rounded bg-gray-100 relative">
                         <p className="text-lg"><strong>Maximum Light Intensity:</strong> {insights.maxLightIntensity} (at {new Date(insights.maxLightIntensityTime).toLocaleString()})</p>
                     </div>
-                    <div className="p-3 border rounded bg-gray-100">
+                    <div className="p-3 border rounded bg-gray-100 relative">
                         <p className="text-lg"><strong>Temperature Standard Deviation:</strong> {insights.tempStdDev} °C</p>
+                        <span className="absolute top-0 right-0 mt-2 mr-2 text-xs bg-blue-500 text-white rounded-full h-4 w-4 flex items-center justify-center cursor-pointer" title="Standard deviation is a measure of the amount of variation or dispersion of a set of values.">i</span>
                     </div>
-                    <div className="p-3 border rounded bg-gray-100">
+                    <div className="p-3 border rounded bg-gray-100 relative">
                         <p className="text-lg"><strong>Humidity Standard Deviation:</strong> {insights.humidityStdDev} %</p>
+                        <span className="absolute top-0 right-0 mt-2 mr-2 text-xs bg-blue-500 text-white rounded-full h-4 w-4 flex items-center justify-center cursor-pointer" title="Standard deviation is a measure of the amount of variation or dispersion of a set of values.">i</span>
                     </div>
-                    <div className="p-3 border rounded bg-gray-100">
+                    <div className="p-3 border rounded bg-gray-100 relative">
                         <p className="text-lg"><strong>Light Intensity Standard Deviation:</strong> {insights.lightIntensityStdDev}</p>
+                        <span className="absolute top-0 right-0 mt-2 mr-2 text-xs bg-blue-500 text-white rounded-full h-4 w-4 flex items-center justify-center cursor-pointer" title="Standard deviation is a measure of the amount of variation or dispersion of a set of values.">i</span>
                     </div>
                 </div>
             )}

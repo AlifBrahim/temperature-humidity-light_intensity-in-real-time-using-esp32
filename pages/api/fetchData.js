@@ -10,7 +10,7 @@ export default async function handler(req, res) {
         database: process.env.DB_NAME
     });
 
-    const [rows] = await connection.execute('SELECT * FROM environment_data ORDER BY timestamp DESC LIMIT 100');
+    const [rows] = await connection.execute('SELECT * FROM environment_data ORDER BY timestamp DESC');
     await connection.end();
 
     res.status(200).json(rows);
