@@ -1,8 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Insights = ({ data }) => {
     const [timeFrame, setTimeFrame] = useState('all');
     const [selectedDate, setSelectedDate] = useState(null);
+    const [avgHumidityLast30Minutes, setAvgHumidityLast30Minutes] = useState(null);
+
+    useEffect(() => {
+        async function fetchAvgHumidityLast30Minutes() {
+            try {
+                const response = await fetch('/api/averageHumidity');
+                const result = await response.json();
+                setAvgHumidityLast30Minutes(result.avgHumidity);
+            } catch (error) {
+                console.error('Error fetching last 30 minutes humidity data:', error);
+            }
+        }
+
+        fetchAvgHumidityLast30Minutes();
+    }, []);
 
     if (!data || data.length === 0) return null;
 
@@ -117,6 +132,9 @@ const Insights = ({ data }) => {
                     </div>
                     <div className="p-3 border rounded bg-yellow-100 relative">
                         <p className="text-lg"><strong>Average Humidity:</strong> {insights.avgHumidity} %</p>
+                    </div>
+                    <div className="p-3 border rounded bg-yellow-100 relative">
+                        <p className="text-lg"><strong>Average Humidity Last 30 Minutes:</strong> {avgHumidityLast30Minutes !== null ? `${avgHumidityLast30Minutes} %` : 'Loading...'}</p>
                     </div>
                     <div className="p-3 border rounded bg-yellow-100 relative">
                         <p className="text-lg"><strong>Minimum Humidity:</strong> {insights.minHumidity} % (at {new Date(insights.minHumidityTime).toLocaleString()})</p>
