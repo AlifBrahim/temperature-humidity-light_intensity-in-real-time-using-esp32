@@ -23,7 +23,8 @@ export default async function handler(req, res) {
     const [rows] = await connection.execute(`
     SELECT AVG(humidity) as avgHumidity 
     FROM environment_data 
-    WHERE timestamp >= ? AND timestamp <= ?`,
+    WHERE CONVERT_TZ(timestamp, '+08:00', '+00:00') >= ? 
+      AND CONVERT_TZ(timestamp, '+08:00', '+00:00') <= ?`,
         [thirtyMinutesAgoString, nowString]
     );
 
