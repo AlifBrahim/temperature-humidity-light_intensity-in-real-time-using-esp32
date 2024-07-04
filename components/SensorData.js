@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import 'tailwindcss/tailwind.css';
+import Insights from './Insights';
 
 const SensorData = () => {
     const [data, setData] = useState([]);
@@ -165,6 +166,7 @@ const SensorData = () => {
                     <h1 className="text-2xl font-semibold">Brightness: {Math.floor(lightIntensity*4096)}</h1>
                 </div>
             </div>
+            <Insights data={data} /> {/* Add Insights component */}
             <div className="overflow-auto mt-5">
                 <table className="min-w-full bg-white border border-gray-300">
                     <thead>
@@ -189,7 +191,6 @@ const SensorData = () => {
             </div>
         </div>
     );
-
 };
 
 export default SensorData;
