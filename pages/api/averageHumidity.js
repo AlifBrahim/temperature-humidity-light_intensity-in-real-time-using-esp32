@@ -9,15 +9,25 @@ export default async function handler(req, res) {
         database: process.env.DB_NAME,
     });
 
+    // Get the current UTC time and 30 minutes ago in UTC
     const now = new Date();
-    const threeHoursAgo = new Date(now.getTime() - 3 * 60 * 60 * 1000);
+    const thirtyMinutesAgo = new Date(now.getTime() - 30 * 60 * 1000);
+
+    // Convert to MySQL compatible format in UTC
+    const nowString = now.toISOString().slice(0, 19).replace('T', ' ');
+    const thirtyMinutesAgoString = thirtyMinutesAgo.toISOString().slice(0, 19).replace('T', ' ');
+
+    console.log(`Current time (UTC): ${nowString}`);
+    console.log(`30 minutes ago (UTC): ${thirtyMinutesAgoString}`);
 
     const [rows] = await connection.execute(`
     SELECT AVG(humidity) as avgHumidity 
     FROM environment_data 
     WHERE timestamp >= ? AND timestamp <= ?`,
-        [threeHoursAgo.toISOString().slice(0, 19).replace('T', ' '), now.toISOString().slice(0, 19).replace('T', ' ')]
+        [thirtyMinutesAgoString, nowString]
     );
+
+    console.log(`Query returned: ${JSON.stringify(rows)}`);
 
     await connection.end();
 
