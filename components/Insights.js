@@ -105,20 +105,44 @@ const Insights = ({ data }) => {
                 )}
             </div>
             {insights.avgTemp && (
-                <>
-                    <p className="text-lg"><strong>Average Temperature:</strong> {insights.avgTemp} °C</p>
-                    <p className="text-lg"><strong>Minimum Temperature:</strong> {insights.minTemp} °C (at {new Date(insights.minTempTime).toLocaleString()})</p>
-                    <p className="text-lg"><strong>Maximum Temperature:</strong> {insights.maxTemp} °C (at {new Date(insights.maxTempTime).toLocaleString()})</p>
-                    <p className="text-lg"><strong>Average Humidity:</strong> {insights.avgHumidity} %</p>
-                    <p className="text-lg"><strong>Minimum Humidity:</strong> {insights.minHumidity} % (at {new Date(insights.minHumidityTime).toLocaleString()})</p>
-                    <p className="text-lg"><strong>Maximum Humidity:</strong> {insights.maxHumidity} % (at {new Date(insights.maxHumidityTime).toLocaleString()})</p>
-                    <p className="text-lg"><strong>Average Light Intensity:</strong> {insights.avgLightIntensity}</p>
-                    <p className="text-lg"><strong>Minimum Light Intensity:</strong> {insights.minLightIntensity} (at {new Date(insights.minLightIntensityTime).toLocaleString()})</p>
-                    <p className="text-lg"><strong>Maximum Light Intensity:</strong> {insights.maxLightIntensity} (at {new Date(insights.maxLightIntensityTime).toLocaleString()})</p>
-                    <p className="text-lg"><strong>Temperature Standard Deviation:</strong> {insights.tempStdDev} °C</p>
-                    <p className="text-lg"><strong>Humidity Standard Deviation:</strong> {insights.humidityStdDev} %</p>
-                    <p className="text-lg"><strong>Light Intensity Standard Deviation:</strong> {insights.lightIntensityStdDev}</p>
-                </>
+                <div className="grid grid-cols-2 gap-4">
+                    <div className="p-3 border rounded bg-gray-100">
+                        <p className="text-lg"><strong>Average Temperature:</strong> {insights.avgTemp} °C</p>
+                    </div>
+                    <div className="p-3 border rounded bg-gray-100">
+                        <p className="text-lg"><strong>Minimum Temperature:</strong> {insights.minTemp} °C (at {new Date(insights.minTempTime).toLocaleString()})</p>
+                    </div>
+                    <div className="p-3 border rounded bg-gray-100">
+                        <p className="text-lg"><strong>Maximum Temperature:</strong> {insights.maxTemp} °C (at {new Date(insights.maxTempTime).toLocaleString()})</p>
+                    </div>
+                    <div className="p-3 border rounded bg-gray-100">
+                        <p className="text-lg"><strong>Average Humidity:</strong> {insights.avgHumidity} %</p>
+                    </div>
+                    <div className="p-3 border rounded bg-gray-100">
+                        <p className="text-lg"><strong>Minimum Humidity:</strong> {insights.minHumidity} % (at {new Date(insights.minHumidityTime).toLocaleString()})</p>
+                    </div>
+                    <div className="p-3 border rounded bg-gray-100">
+                        <p className="text-lg"><strong>Maximum Humidity:</strong> {insights.maxHumidity} % (at {new Date(insights.maxHumidityTime).toLocaleString()})</p>
+                    </div>
+                    <div className="p-3 border rounded bg-gray-100">
+                        <p className="text-lg"><strong>Average Light Intensity:</strong> {insights.avgLightIntensity}</p>
+                    </div>
+                    <div className="p-3 border rounded bg-gray-100">
+                        <p className="text-lg"><strong>Minimum Light Intensity:</strong> {insights.minLightIntensity} (at {new Date(insights.minLightIntensityTime).toLocaleString()})</p>
+                    </div>
+                    <div className="p-3 border rounded bg-gray-100">
+                        <p className="text-lg"><strong>Maximum Light Intensity:</strong> {insights.maxLightIntensity} (at {new Date(insights.maxLightIntensityTime).toLocaleString()})</p>
+                    </div>
+                    <div className="p-3 border rounded bg-gray-100">
+                        <p className="text-lg"><strong>Temperature Standard Deviation:</strong> {insights.tempStdDev} °C</p>
+                    </div>
+                    <div className="p-3 border rounded bg-gray-100">
+                        <p className="text-lg"><strong>Humidity Standard Deviation:</strong> {insights.humidityStdDev} %</p>
+                    </div>
+                    <div className="p-3 border rounded bg-gray-100">
+                        <p className="text-lg"><strong>Light Intensity Standard Deviation:</strong> {insights.lightIntensityStdDev}</p>
+                    </div>
+                </div>
             )}
         </div>
     );
