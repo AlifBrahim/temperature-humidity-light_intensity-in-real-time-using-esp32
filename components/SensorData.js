@@ -148,7 +148,7 @@ const SensorData = () => {
             hour: '2-digit',
             minute: '2-digit',
             second: '2-digit',
-            timeZone: 'Asia/Kuala_Lumpur',
+            // timeZone: 'Asia/Kuala_Lumpur',
         };
         return new Intl.DateTimeFormat('en-GB', options).format(new Date(timestamp));
     };
