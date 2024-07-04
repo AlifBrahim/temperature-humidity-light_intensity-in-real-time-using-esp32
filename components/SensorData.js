@@ -140,6 +140,19 @@ const SensorData = () => {
 
     }, [data, currentTime]);
 
+    const formatTimestamp = (timestamp) => {
+        const options = {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            timeZone: 'Asia/Kuala_Lumpur',
+        };
+        return new Intl.DateTimeFormat('en-GB', options).format(new Date(timestamp));
+    };
+
     return (
         <div className="p-5">
             <h1 className="text-3xl font-semibold mb-5">Real-Time Sensor Data</h1>
@@ -179,7 +192,7 @@ const SensorData = () => {
                     <tbody className="text-gray-600 text-sm font-medium">
                     {data.map((entry, index) => (
                         <tr key={index} className="border-b border-gray-200 hover:bg-gray-100">
-                            <td className="py-3 px-6 text-left whitespace-nowrap">{new Date(entry.timestamp).toLocaleString()}</td>
+                            <td className="py-3 px-6 text-left whitespace-nowrap">{formatTimestamp(entry.timestamp)}</td>
                             <td className="py-3 px-6 text-left">{entry.temperature}</td>
                             <td className="py-3 px-6 text-left">{entry.humidity}</td>
                             <td className="py-3 px-6 text-left">{entry.light_intensity}</td>
